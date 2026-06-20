@@ -298,3 +298,46 @@ Fase 1 — Schema dati Supabase e auth:
 - Nome "Filament" è placeholder — find & replace quando si decide il nome definitivo.
 - `CLAUDE.md` importa `AGENTS.md` (generato da create-next-app) che avverte: questa versione di Next.js 16 ha breaking changes rispetto al training — consultare `node_modules/next/dist/docs/` prima di scrivere codice. L'import è stato mantenuto in cima a CLAUDE.md.
 - File convention: l'auth proxy vive in `src/proxy.ts` (NON `src/middleware.ts`) per via della deprecazione in Next.js 16.
+
+---
+
+## Sessione design system neobrutalist (2026-06-20)
+
+Applicato il design system neobrutalist di Filament a tutte le pagine esistenti. MVP funzionante invariato nella logica — solo restyling.
+
+### IMPORTANTE: adattamento a Tailwind CSS v4
+Il prompt originale era scritto per **Tailwind v3** (`tailwind.config.ts`, `@tailwind base/components/utilities`, `darkMode: 'class'`). Questo progetto usa **Tailwind v4** (`@tailwindcss/postcss`, `@import "tailwindcss"`), dove la configurazione è CSS-based. Ho quindi adattato, **senza creare `tailwind.config.ts`** (non viene letto in v4):
+- Tutti i token (colori `paper/ink/blue-brand/blue-dark/void/surface/snow`, font `heading/body`, `--radius-*`, `--shadow-neo*`) sono definiti in `@theme { }` dentro `src/app/globals.css`.
+- Dark mode class-based via `@custom-variant dark (&:where(.dark, .dark *));` (in v4 `dark:` di default seguirebbe `prefers-color-scheme`).
+- Le utility generate (`bg-paper`, `text-ink`, `border-ink`, `shadow-neo`, `font-heading`, ecc.) sono le stesse che il prompt si aspettava: il risultato visivo è identico.
+
+### Dark mode funzionante
+Poiché il design usa selettori `.dark` espliciti (es. `.dark .neo-btn`) e non c'è toggle, ho aggiunto un piccolo **script no-flash** inline in `layout.tsx` che applica la classe `.dark` su `<html>` prima del paint, leggendo `localStorage.theme` o `prefers-color-scheme`. `suppressHydrationWarning` su `<html>`.
+
+### File modificati
+- `src/app/globals.css` — riscritto: `@theme`, `@custom-variant dark`, `.neo-btn`, tipografia heading/body.
+- `src/app/layout.tsx` — font Space Grotesk (heading) + DM Sans (body); script no-flash dark mode; body `bg-paper dark:bg-void`.
+- `src/app/page.tsx` — landing neobrutalist (hero, problemi, passi, CTA, footer; bordi 2px, shadow-neo, bottoni neo-btn).
+- `src/app/(auth)/login/page.tsx` e `signup/page.tsx` — input/bottoni/badge neobrutalist.
+- `src/app/dashboard/page.tsx` — card statistiche con shadow-neo, tabella bordata 2px, badge "Firmato" bordo netto.
+- `src/app/dashboard/upload/page.tsx` — dropzone, input password, stati error/pending.
+- `src/app/dashboard/settings/page.tsx` — sezioni card, bottone "Esci" outline neo-btn.
+- `src/app/certificato/[id]/page.tsx` — badge firma, card dati/resoconto, disclaimer amber bordato.
+- `src/components/ui/copy-hash.tsx` — bottone copia con bordo 2px.
+
+### Convenzioni design applicate
+- Sfondi pagina: `bg-paper dark:bg-void`; testo `text-ink dark:text-snow` (toni attenuati con `/70`, `/60`, `/50`).
+- Titoli `font-heading font-bold`; corpo `font-body`.
+- Bordi `border-2 border-ink dark:border-snow` su card, input, bottoni, badge.
+- `rounded-sm` ovunque (max 4px via token); nessun `rounded-lg/xl/full`, nessun `rounded-full` (i badge erano pill → ora rettangoli netti).
+- Solo ombre dure offset (`shadow-neo` / `shadow-neo-dark`), nessun blur diffuso.
+- `neo-btn` su tutti i bottoni primari/secondari; transizioni ≤ 120ms.
+- Bottoni primari `bg-blue-brand text-snow`; secondari `bg-paper dark:bg-void`.
+- Badge verde (firmato) e rosso (errore) con bordo 2px colorato.
+
+### Verifica
+- `npm run lint` → zero warning.
+- `npm run build` → compila pulito (9 route), zero warning, TypeScript strict OK.
+
+### Toggle tema
+Aggiunto `src/components/ui/theme-toggle.tsx` (client component): bottone fisso in basso a destra, presente su tutte le pagine (montato in `layout.tsx`). Togglo `.dark` su `documentElement` e persisto in `localStorage.theme`. Lo script no-flash in `layout.tsx` rilegge `localStorage.theme` al caricamento, quindi la scelta è persistente tra le visite. Icona ☾/☀ con `suppressHydrationWarning` (lazy-init dello stato dal DOM, nessun setState in effect → lint pulito).

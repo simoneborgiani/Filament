@@ -45,10 +45,10 @@ export default function Home() {
       {/* Hero */}
       <section className="px-6 py-24 text-center">
         <div className="mx-auto max-w-3xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 sm:text-6xl dark:text-zinc-50">
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-ink sm:text-6xl dark:text-snow">
             La tua perizia, certificata in un clic
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+          <p className="font-body mx-auto mt-6 max-w-2xl text-lg text-ink/70 dark:text-snow/70">
             Ogni documento che carichi riceve automaticamente una prova di
             integrità verificabile da chiunque — assicurazione, avvocato, giudice
             — senza bisogno di account o fiducia nella parola dello studio.
@@ -56,13 +56,13 @@ export default function Home() {
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/signup"
-              className="inline-flex w-full items-center justify-center rounded-lg bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-700 sm:w-auto dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-300"
+              className="neo-btn inline-flex w-full items-center justify-center rounded-sm border-2 border-ink bg-blue-brand px-5 py-2.5 font-body font-medium text-snow sm:w-auto dark:border-edge"
             >
               Inizia gratis
             </Link>
             <Link
               href="/login"
-              className="inline-flex w-full items-center justify-center rounded-lg border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-100 sm:w-auto dark:border-zinc-700 dark:text-zinc-100 dark:hover:bg-zinc-800"
+              className="neo-btn inline-flex w-full items-center justify-center rounded-sm border-2 border-ink bg-paper px-5 py-2.5 font-body font-medium text-ink sm:w-auto dark:border-edge dark:bg-void dark:text-snow"
             >
               Accedi
             </Link>
@@ -71,24 +71,24 @@ export default function Home() {
       </section>
 
       {/* Problema */}
-      <section className="border-t border-zinc-200 px-6 py-20 dark:border-zinc-800">
+      <section className="border-t-2 border-ink px-6 py-20 dark:border-edge">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-center text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+          <h2 className="font-heading text-center text-3xl font-bold tracking-tight text-ink dark:text-snow">
             Una perizia contestata può costarti cara
           </h2>
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
             {problemi.map((p) => (
               <div
                 key={p.titolo}
-                className="rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900"
+                className="rounded-sm border-2 border-ink bg-paper p-6 shadow-neo dark:border-edge dark:bg-surface dark:shadow-neo-dark"
               >
                 <div className="text-3xl" aria-hidden>
                   {p.icon}
                 </div>
-                <h3 className="mt-4 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+                <h3 className="font-heading mt-4 text-lg font-bold text-ink dark:text-snow">
                   {p.titolo}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <p className="font-body mt-2 text-sm leading-relaxed text-ink/70 dark:text-snow/70">
                   {p.testo}
                 </p>
               </div>
@@ -98,21 +98,21 @@ export default function Home() {
       </section>
 
       {/* Come funziona */}
-      <section className="border-t border-zinc-200 px-6 py-20 dark:border-zinc-800">
+      <section className="border-t-2 border-ink px-6 py-20 dark:border-edge">
         <div className="mx-auto max-w-5xl">
-          <h2 className="text-center text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+          <h2 className="font-heading text-center text-3xl font-bold tracking-tight text-ink dark:text-snow">
             Tre passi, zero complessità
           </h2>
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
             {passi.map((s, i) => (
               <div key={s.titolo} className="text-center">
-                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-zinc-900 text-lg font-semibold text-white dark:bg-zinc-50 dark:text-zinc-900">
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-sm border-2 border-ink bg-blue-brand font-heading text-lg font-bold text-snow dark:border-edge">
                   {i + 1}
                 </div>
-                <h3 className="mt-5 text-lg font-semibold text-zinc-900 dark:text-zinc-50">
+                <h3 className="font-heading mt-5 text-lg font-bold text-ink dark:text-snow">
                   {s.titolo}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <p className="font-body mt-2 text-sm leading-relaxed text-ink/70 dark:text-snow/70">
                   {s.testo}
                 </p>
               </div>
@@ -122,17 +122,17 @@ export default function Home() {
       </section>
 
       {/* Value prop */}
-      <section className="border-t border-zinc-200 px-6 py-20 dark:border-zinc-800">
+      <section className="border-t-2 border-ink px-6 py-20 dark:border-edge">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-ink dark:text-snow">
             Pensato per chi lavora con le pratiche ogni giorno
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+          <p className="font-body mx-auto mt-6 max-w-2xl text-lg text-ink/70 dark:text-snow/70">
             In più, ogni documento viene riassunto automaticamente — parti
             coinvolte, date, importi, tipo di danno dichiarato — così puoi
             orientarti in una pratica in secondi, senza rileggere tutto da capo.
           </p>
-          <p className="mx-auto mt-4 max-w-xl text-xs text-zinc-500 dark:text-zinc-500">
+          <p className="font-body mx-auto mt-4 max-w-xl text-xs text-ink/50 dark:text-snow/50">
             Il resoconto automatico è a scopo organizzativo e non costituisce
             consulenza legale né perizia tecnica.
           </p>
@@ -140,17 +140,17 @@ export default function Home() {
       </section>
 
       {/* CTA finale */}
-      <section className="border-t border-zinc-200 px-6 py-20 dark:border-zinc-800">
+      <section className="border-t-2 border-ink px-6 py-20 dark:border-edge">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+          <h2 className="font-heading text-3xl font-bold tracking-tight text-ink dark:text-snow">
             Inizia a certificare le tue perizie oggi
           </h2>
-          <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400">
+          <p className="font-body mt-4 text-lg text-ink/70 dark:text-snow/70">
             Un mese gratuito, nessuna carta di credito richiesta.
           </p>
           <Link
             href="/signup"
-            className="mt-8 inline-flex items-center justify-center rounded-lg bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-300"
+            className="neo-btn mt-8 inline-flex items-center justify-center rounded-sm border-2 border-ink bg-blue-brand px-5 py-2.5 font-body font-medium text-snow dark:border-edge"
           >
             Crea il tuo account
           </Link>
@@ -158,15 +158,15 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-zinc-200 px-6 py-10 dark:border-zinc-800">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 text-sm text-zinc-500 sm:flex-row dark:text-zinc-400">
+      <footer className="border-t-2 border-ink px-6 py-10 dark:border-edge">
+        <div className="font-body mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 text-sm text-ink/60 sm:flex-row dark:text-snow/60">
           <p>
             Filament — Sistema di certificazione documenti per studi di
             infortunistica
           </p>
           <Link
             href="/login"
-            className="font-medium text-zinc-900 underline underline-offset-4 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
+            className="font-medium text-ink underline underline-offset-4 hover:text-blue-brand dark:text-snow"
           >
             Accedi
           </Link>

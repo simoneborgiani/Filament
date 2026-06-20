@@ -36,12 +36,12 @@ type CertificateDoc = {
 function HashRow({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+      <dt className="font-body text-sm font-medium text-ink/60 dark:text-snow/60">
         {label}
       </dt>
       <dd className="mt-1 flex items-center">
         <span
-          className="font-mono text-sm text-zinc-900 dark:text-zinc-100"
+          className="font-mono text-sm text-ink dark:text-snow"
           title={value}
         >
           {truncateHash(value)}
@@ -61,10 +61,10 @@ function SummaryText({
 }) {
   return (
     <div>
-      <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+      <dt className="font-body text-sm font-medium text-ink/60 dark:text-snow/60">
         {label}
       </dt>
-      <dd className="mt-1 text-zinc-900 dark:text-zinc-100">{value || '—'}</dd>
+      <dd className="font-body mt-1 text-ink dark:text-snow">{value || '—'}</dd>
     </div>
   )
 }
@@ -78,10 +78,10 @@ function SummaryList({
 }) {
   return (
     <div>
-      <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+      <dt className="font-body text-sm font-medium text-ink/60 dark:text-snow/60">
         {label}
       </dt>
-      <dd className="mt-1 text-zinc-900 dark:text-zinc-100">
+      <dd className="font-body mt-1 text-ink dark:text-snow">
         {values && values.length > 0 ? (
           <ul className="list-inside list-disc space-y-0.5">
             {values.map((v, i) => (
@@ -163,62 +163,62 @@ export default async function CertificatoPage({
           <div className="mb-8">
             <Link
               href="/dashboard"
-              className="text-sm text-zinc-500 underline underline-offset-4 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+              className="font-body text-sm text-ink/60 underline underline-offset-4 hover:text-blue-brand dark:text-snow/60"
             >
               ← Torna alla dashboard
             </Link>
           </div>
         )}
 
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="font-heading text-3xl font-bold tracking-tight text-ink dark:text-snow">
           Certificato di integrità
         </h1>
 
         <div className="mt-6">
           {signatureValid ? (
-            <span className="inline-flex items-center rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800 dark:bg-green-950 dark:text-green-300">
+            <span className="inline-flex items-center rounded-sm border-2 border-green-900 bg-green-100 px-2 py-0.5 font-body text-xs font-medium text-green-900 dark:border-green-300 dark:bg-green-950 dark:text-green-300">
               ✓ Firma verificata
             </span>
           ) : (
-            <span className="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800 dark:bg-red-950 dark:text-red-300">
+            <span className="inline-flex items-center rounded-sm border-2 border-red-900 bg-red-100 px-2 py-0.5 font-body text-xs font-medium text-red-900 dark:border-red-300 dark:bg-red-950 dark:text-red-300">
               ✗ Firma non valida
             </span>
           )}
         </div>
 
-        <dl className="mt-8 grid grid-cols-1 gap-6 rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900 sm:grid-cols-2">
+        <dl className="mt-8 grid grid-cols-1 gap-6 rounded-sm border-2 border-ink bg-paper p-6 shadow-neo dark:border-edge dark:bg-surface dark:shadow-neo-dark sm:grid-cols-2">
           <div>
-            <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            <dt className="font-body text-sm font-medium text-ink/60 dark:text-snow/60">
               Nome file
             </dt>
-            <dd className="mt-1 break-words text-zinc-900 dark:text-zinc-100">
+            <dd className="font-body mt-1 break-words text-ink dark:text-snow">
               {doc.file_name}
             </dd>
           </div>
 
           <div>
-            <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            <dt className="font-body text-sm font-medium text-ink/60 dark:text-snow/60">
               Dimensione
             </dt>
-            <dd className="mt-1 text-zinc-900 dark:text-zinc-100">
+            <dd className="font-body mt-1 text-ink dark:text-snow">
               {formatFileSize(doc.file_size)}
             </dd>
           </div>
 
           <div>
-            <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            <dt className="font-body text-sm font-medium text-ink/60 dark:text-snow/60">
               Data di caricamento
             </dt>
-            <dd className="mt-1 text-zinc-900 dark:text-zinc-100">
+            <dd className="font-body mt-1 text-ink dark:text-snow">
               {formatDate(doc.created_at)}
             </dd>
           </div>
 
           <div>
-            <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            <dt className="font-body text-sm font-medium text-ink/60 dark:text-snow/60">
               Certificato da
             </dt>
-            <dd className="mt-1 text-zinc-900 dark:text-zinc-100">
+            <dd className="font-body mt-1 text-ink dark:text-snow">
               {profile?.studio_name ?? '—'}
             </dd>
           </div>
@@ -232,25 +232,25 @@ export default async function CertificatoPage({
           </div>
 
           <div className="sm:col-span-2">
-            <dt className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            <dt className="font-body text-sm font-medium text-ink/60 dark:text-snow/60">
               Previous hash
             </dt>
             <dd className="mt-1">
               {doc.previous_hash === null ? (
-                <span className="text-zinc-600 dark:text-zinc-400">
+                <span className="font-body text-ink/70 dark:text-snow/70">
                   Primo documento della catena (blocco genesi)
                 </span>
               ) : previousDocId ? (
                 <Link
                   href={`/certificato/${previousDocId}`}
-                  className="font-mono text-sm text-zinc-900 underline underline-offset-4 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
+                  className="font-mono text-sm text-ink underline underline-offset-4 hover:text-blue-brand dark:text-snow"
                   title={doc.previous_hash}
                 >
                   {truncateHash(doc.previous_hash)}
                 </Link>
               ) : (
                 <span
-                  className="font-mono text-sm text-zinc-900 dark:text-zinc-100"
+                  className="font-mono text-sm text-ink dark:text-snow"
                   title={doc.previous_hash}
                 >
                   {truncateHash(doc.previous_hash)}
@@ -261,12 +261,12 @@ export default async function CertificatoPage({
         </dl>
 
         <section className="mt-8">
-          <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
+          <h2 className="font-heading text-xl font-bold text-ink dark:text-snow">
             Resoconto documento
           </h2>
 
           {doc.ai_summary ? (
-            <dl className="mt-4 grid grid-cols-1 gap-6 rounded-xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900 sm:grid-cols-2">
+            <dl className="mt-4 grid grid-cols-1 gap-6 rounded-sm border-2 border-ink bg-paper p-6 shadow-neo dark:border-edge dark:bg-surface dark:shadow-neo-dark sm:grid-cols-2">
               <SummaryText
                 label="Tipo documento"
                 value={doc.ai_summary.tipo_documento}
@@ -293,19 +293,19 @@ export default async function CertificatoPage({
               </div>
             </dl>
           ) : (
-            <p className="mt-4 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-6 text-center text-sm text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+            <p className="font-body mt-4 rounded-sm border-2 border-ink bg-paper px-4 py-6 text-center text-sm text-ink/70 dark:border-edge dark:bg-surface dark:text-snow/70">
               Resoconto in elaborazione… aggiorna la pagina tra qualche secondo.
             </p>
           )}
 
-          <p className="mt-3 rounded-lg bg-amber-50 px-4 py-3 text-xs leading-relaxed text-amber-800 dark:bg-amber-950/50 dark:text-amber-300">
+          <p className="font-body mt-3 rounded-sm border-2 border-amber-900 bg-amber-100 px-4 py-3 text-xs leading-relaxed text-amber-900 dark:border-amber-300 dark:bg-amber-950 dark:text-amber-300">
             ⚠️ Questo resoconto è generato automaticamente a scopo organizzativo.
             Non costituisce consulenza legale né perizia tecnica. Verificare sempre
             con un professionista qualificato.
           </p>
         </section>
 
-        <p className="mt-8 text-xs leading-relaxed text-zinc-500 dark:text-zinc-500">
+        <p className="font-body mt-8 text-xs leading-relaxed text-ink/50 dark:text-snow/50">
           Questo certificato attesta l&apos;integrità crittografica del documento
           al momento del caricamento. Non costituisce validazione del contenuto né
           consulenza legale.

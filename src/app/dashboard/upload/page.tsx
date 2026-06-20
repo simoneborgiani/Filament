@@ -51,23 +51,23 @@ export default function UploadPage() {
         <div className="mb-8">
           <Link
             href="/dashboard"
-            className="text-sm text-zinc-500 underline underline-offset-4 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200"
+            className="font-body text-sm text-ink/60 underline underline-offset-4 hover:text-blue-brand dark:text-snow/60"
           >
             ← Torna alla dashboard
           </Link>
         </div>
 
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="font-heading text-3xl font-bold tracking-tight text-ink dark:text-snow">
           Carica e certifica
         </h1>
-        <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="font-body mt-2 text-sm text-ink/70 dark:text-snow/70">
           Il documento viene hashato (SHA-256), firmato con la tua chiave privata
           e aggiunto alla tua hash-chain.
         </p>
 
         <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
-            <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            <span className="font-body text-sm font-medium text-ink dark:text-snow">
               Documento
             </span>
 
@@ -87,24 +87,24 @@ export default function UploadPage() {
                   fileInputRef.current?.click()
                 }
               }}
-              className={`cursor-pointer rounded-lg border-2 border-dashed px-4 py-8 text-center transition-colors ${
+              className={`cursor-pointer rounded-sm border-2 border-dashed px-4 py-8 text-center transition-colors duration-100 ${
                 isDragging
-                  ? 'border-zinc-900 bg-zinc-50 dark:border-zinc-300 dark:bg-zinc-800'
-                  : 'border-zinc-300 hover:border-zinc-400 dark:border-zinc-700 dark:hover:border-zinc-600'
+                  ? 'border-blue-brand bg-paper dark:bg-surface'
+                  : 'border-ink hover:border-blue-brand dark:border-edge'
               }`}
             >
               {selectedFile ? (
                 <div>
-                  <p className="truncate font-medium text-zinc-900 dark:text-zinc-100">
+                  <p className="font-body truncate font-medium text-ink dark:text-snow">
                     {selectedFile.name}
                   </p>
-                  <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="font-body mt-1 text-sm text-ink/60 dark:text-snow/60">
                     {formatFileSize(selectedFile.size)} · clicca o trascina per
                     cambiare
                   </p>
                 </div>
               ) : (
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                <p className="font-body text-sm text-ink/60 dark:text-snow/60">
                   Trascina qui il file, oppure clicca per selezionarlo
                 </p>
               )}
@@ -120,7 +120,7 @@ export default function UploadPage() {
               className="sr-only"
               onChange={(e) => handleFiles(e.currentTarget.files)}
             />
-            <p className="text-xs text-zinc-500 dark:text-zinc-500">
+            <p className="font-body text-xs text-ink/50 dark:text-snow/50">
               PDF, JPG, PNG o WebP. Max 50MB.
             </p>
           </div>
@@ -128,7 +128,7 @@ export default function UploadPage() {
           <div className="flex flex-col gap-1.5">
             <label
               htmlFor="password"
-              className="text-sm font-medium text-zinc-700 dark:text-zinc-300"
+              className="font-body text-sm font-medium text-ink dark:text-snow"
             >
               Password account — serve per firmare il documento
             </label>
@@ -138,14 +138,14 @@ export default function UploadPage() {
               type="password"
               autoComplete="current-password"
               required
-              className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50 dark:placeholder:text-zinc-500 dark:focus:border-zinc-500 dark:focus:ring-zinc-700"
+              className="rounded-sm border-2 border-ink bg-paper px-4 py-2.5 font-body text-ink placeholder:text-ink/40 focus:border-blue-brand focus:outline-none dark:border-edge dark:bg-void dark:text-snow dark:placeholder:text-snow/40"
             />
           </div>
 
           {error && (
             <p
               role="alert"
-              className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950 dark:text-red-300"
+              className="rounded-sm border-2 border-red-900 bg-red-100 px-3 py-2 font-body text-sm font-medium text-red-900 dark:border-red-300 dark:bg-red-950 dark:text-red-300"
             >
               {error}
             </p>
@@ -154,7 +154,7 @@ export default function UploadPage() {
           {isPending && (
             <p
               role="status"
-              className="rounded-lg bg-zinc-100 px-3 py-2 text-sm text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+              className="rounded-sm border-2 border-ink bg-paper px-3 py-2 font-body text-sm text-ink dark:border-edge dark:bg-surface dark:text-snow"
             >
               Caricamento in corso… questo può richiedere qualche secondo per file
               grandi.
@@ -164,7 +164,7 @@ export default function UploadPage() {
           <button
             type="submit"
             disabled={isPending || !selectedFile}
-            className="mt-2 inline-flex items-center justify-center rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-300"
+            className="neo-btn mt-2 inline-flex items-center justify-center rounded-sm border-2 border-ink bg-blue-brand px-5 py-2.5 font-body font-medium text-snow disabled:cursor-not-allowed disabled:opacity-60 dark:border-edge"
           >
             {isPending ? 'Caricamento e firma…' : 'Carica e certifica'}
           </button>

@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-heading",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmSans = DM_Sans({
   subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-body",
 });
 
 export const metadata: Metadata = {
@@ -17,6 +20,10 @@ export const metadata: Metadata = {
   description:
     "Sistema di notarizzazione documenti per periti infortunistica stradale",
 };
+
+// No-flash: applica la classe `.dark` su <html> prima del paint, in base a
+// localStorage o preferenza di sistema. Il design system usa selettori `.dark`.
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})()`;
 
 export default function RootLayout({
   children,
@@ -26,10 +33,15 @@ export default function RootLayout({
   return (
     <html
       lang="it"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${dmSans.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="bg-paper text-ink dark:bg-void dark:text-snow flex min-h-full flex-col">
         {children}
+        <ThemeToggle />
       </body>
     </html>
   );
